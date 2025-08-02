@@ -1,0 +1,17 @@
+name: Connpass Reminder
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "05 19 * * *"  # 毎日朝19時実行
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: python main.py
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
