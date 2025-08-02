@@ -1,7 +1,7 @@
 name: Connpass Reminder
 on:
   schedule:
-    - cron: "10 19 * * *"  # 毎日朝19時実行
+    - cron: "05 19 * * *"  # 毎日朝19時実行
 jobs:
   notify:
     runs-on: ubuntu-latest
@@ -12,3 +12,5 @@ jobs:
           python-version: '3.11'
       - run: pip install requests
       - run: python main.py
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
